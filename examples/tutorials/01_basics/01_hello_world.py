@@ -23,7 +23,10 @@ import cozmo
 
 
 def cozmo_program(robot: cozmo.robot.Robot):
-    robot.say_text("Hello World").wait_for_completed()
+    # robot.say_text("Hi Lyo kerk").wait_for_completed()
+    robot.set_lift_height(10.0).wait_for_completed()
+    # MIN_HEAD_ANGLE = util.degrees(-25)
+    robot.set_head_angle(cozmo.util.degrees(0)).wait_for_completed()
 
 
 cozmo.run_program(cozmo_program)

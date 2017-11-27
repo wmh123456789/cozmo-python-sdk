@@ -690,7 +690,7 @@ def handle_cozmoImage():
             if image:
                 # by wmh
                 # print (dir(image.raw_image))
-                print (image.raw_image.height,image.raw_image.width)
+                # print (image.raw_image.height,image.raw_image.width)
                 # - by wmh
 
                 if _display_debug_annotations != DEBUG_ANNOTATIONS_DISABLED:
@@ -836,9 +836,9 @@ def run(sdk_conn):
     # Turn on image receiving by the camera
     robot.camera.image_stream_enabled = True
 
-
-
     flask_helpers.run_flask(flask_app)
+
+    # print ("I am here!!!!")
 
 if __name__ == '__main__':
     cozmo.setup_basic_logging()
