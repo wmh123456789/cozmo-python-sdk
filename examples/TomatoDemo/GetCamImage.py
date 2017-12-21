@@ -23,6 +23,7 @@ def loop(robot: cozmo.robot.Robot):
     # initialize csv log file
     csvfp = open(BUFF_PATH+'RobotState.csv','w')
     csvfp.write('Time,')
+    csvfp.write('PosX, PosY, PosZ,')
     csvfp.write('RotQ0, RotQ2, RotQ3, RotQ4,')
     csvfp.write('AngleZ, OriginID,')
     csvfp.write('AccX, AccY, AccZ,')
