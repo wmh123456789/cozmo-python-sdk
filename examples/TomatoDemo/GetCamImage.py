@@ -7,7 +7,7 @@ import os
 import cozmo
 
 # BUFF_PATH = "/home/wmh/work/seqbuff/"
-BUFF_PATH = "/Users/wty/work/TestSeq/MoveOnTexture3/"
+BUFF_PATH = "/Users/wty/work/TestSeq/temp/"
 
 BUFF_LENGTH = 10000
 last_image = None
@@ -32,7 +32,7 @@ def loop(robot: cozmo.robot.Robot):
             im = capture_pic(robot).raw_image
             # timestamp = str(time.strftime("%H%M%S"))+"_"+str(time.time())
             # timestamp = str('%.4f' % time.time())
-            print("Increment " + str(inc)+":"+str(im.size))
+            print("Get image No." + str(inc)+", in size:"+str(im.size))
             # im.save(str('%.4f'%time.time())+'.png','png')
             im.save(BUFF_PATH + str(inc) + '.png','png')
             # im.save(BUFF_PATH + str(inc) + '.jpg')
