@@ -6,7 +6,9 @@ import os
 
 import cozmo
 
-BUFF_PATH = "/home/wmh/work/seqbuff/"
+# BUFF_PATH = "/home/wmh/work/seqbuff/"
+BUFF_PATH = "/Users/wty/work/TestSeq/MoveOnTexture1/"
+
 BUFF_LENGTH = 10000
 last_image = None
 
@@ -15,7 +17,7 @@ def loop(robot: cozmo.robot.Robot):
 
     robot.set_lift_height(50.0).wait_for_completed()
     # MIN_HEAD_ANGLE = util.degrees(-25)
-    robot.set_head_angle(cozmo.util.degrees(15)).wait_for_completed()
+    robot.set_head_angle(cozmo.util.degrees(-15)).wait_for_completed()
     # robot.set_head_angle(cozmo.robot.MIN_HEAD_ANGLE).wait_for_completed()
     while inc < BUFF_LENGTH :
             im = capture_pic(robot).raw_image
@@ -29,6 +31,7 @@ def loop(robot: cozmo.robot.Robot):
             fp.write(str('%.4f' % time.time()))
             fp.close()
             inc += 1
+            time.sleep(0.19)
 
 
 def capture_pic(robot: cozmo.robot.Robot):
