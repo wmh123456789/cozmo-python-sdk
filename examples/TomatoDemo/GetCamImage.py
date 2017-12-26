@@ -7,7 +7,7 @@ import os
 import cozmo
 
 # BUFF_PATH = "/home/wmh/work/seqbuff/"
-BUFF_PATH = "/Users/wty/work/TestSeq/temp/"
+BUFF_PATH = "/Users/wty/work/TestSeq/Still2/"
 
 BUFF_LENGTH = 10000
 last_image = None
@@ -17,7 +17,7 @@ def loop(robot: cozmo.robot.Robot):
 
     robot.set_lift_height(50.0).wait_for_completed()
     # MIN_HEAD_ANGLE = util.degrees(-25)
-    robot.set_head_angle(cozmo.util.degrees(-25)).wait_for_completed()
+    robot.set_head_angle(cozmo.util.degrees(0)).wait_for_completed()
     # robot.set_head_angle(cozmo.robot.MIN_HEAD_ANGLE).wait_for_completed()
 
     # initialize csv log file
@@ -30,34 +30,36 @@ def loop(robot: cozmo.robot.Robot):
     csvfp.write('GyroX, GyroY, GyroZ\n')
 
     while inc < BUFF_LENGTH :
-            im = capture_pic(robot).raw_image
-            # timestamp = str(time.strftime("%H%M%S"))+"_"+str(time.time())
-            # timestamp = str('%.4f' % time.time())
-            print("Get image No." + str(inc)+", in size:"+str(im.size))
-            # im.save(str('%.4f'%time.time())+'.png','png')
-            im.save(BUFF_PATH + str(inc) + '.png','png')
-            # im.save(BUFF_PATH + str(inc) + '.jpg')
+        timestamp = str('%.4f' % time.time())
+        # im = capture_pic(robot).raw_image
+        # # timestamp = str(time.strftime("%H%M%S"))+"_"+str(time.time())
 
-            #Write timestamp and robot state to file
-            fp = open(BUFF_PATH+str(inc)+'.txt','w')
-            timestamp = str('%.4f' % time.time())
-            fp.write(timestamp)
-            fp.close()
+        # print("Get image No." + str(inc)+", in size:"+str(im.size))
+        # # im.save(str('%.4f'%time.time())+'.png','png')
+        # # im.save(BUFF_PATH + str(inc) + '.png','png')
+        # im.save(BUFF_PATH + str(inc) + '.jpg')
+        #
+        # #Write timestamp and robot state to file
+        # fp = open(BUFF_PATH+str(inc)+'.txt','w')
 
-            # GetRobotState(robot,timestamp,csvfp)
-            pose = robot.pose
-            csvfp.write(timestamp+',')
-            csvfp.write('%.1f, %.1f, %.1f,' % pose.position.x_y_z)
-            csvfp.write('%.1f, %.1f, %.1f, %.1f,' % pose.rotation.q0_q1_q2_q3)
-            csvfp.write('%.1f,' % pose.rotation.angle_z.degrees)
-            csvfp.write('%s,' % pose.origin_id)
+        # fp.write(timestamp)
+        # fp.close()
 
-            csvfp.write('%.1f, %.1f, %.1f,' % robot.accelerometer.x_y_z)
-            csvfp.write('%.1f, %.1f, %.1f,' % robot.gyro.x_y_z)
-            csvfp.write('\n')
+        # GetRobotState(robot,timestamp,csvfp)
+        pose = robot.pose
+        csvfp.write(timestamp +',')
+        csvfp.write('%.1f, %.1f, %.1f,' % pose.position.x_y_z)
+        csvfp.write('%.1f, %.1f, %.1f, %.1f,' % pose.rotation.q0_q1_q2_q3)
+        csvfp.write('%.1f,' % pose.rotation.angle_z.degrees)
+        csvfp.write('%s,' % pose.origin_id)
 
-            inc += 1
-            time.sleep(0.19)
+        csvfp.write('%.1f, %.1f, %.1f,' % robot.accelerometer.x_y_z)
+        csvfp.write('%.1f, %.1f, %.1f,' % robot.gyro.x_y_z)
+        csvfp.write('\n')
+
+        inc += 1
+        print(inc)
+        time.sleep(0.05)
     csvfp.close()
 
 def GetRobotState(robot:cozmo.robot.Robot):
