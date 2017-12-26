@@ -7,22 +7,23 @@ import os
 import cozmo
 
 # BUFF_PATH = "/home/wmh/work/seqbuff/"
-BUFF_PATH = "/Users/wty/work/TestSeq/Still2/"
+BUFF_PATH = "/Users/wty/work/TestSeq/MoveOnMat1/"
 
 BUFF_LENGTH = 10000
 last_image = None
 
 def loop(robot: cozmo.robot.Robot):
     inc = 1
+    HeadAngle = -15
 
     robot.set_lift_height(50.0).wait_for_completed()
     # MIN_HEAD_ANGLE = util.degrees(-25)
-    robot.set_head_angle(cozmo.util.degrees(0)).wait_for_completed()
+    robot.set_head_angle(cozmo.util.degrees(HeadAngle)).wait_for_completed()
     # robot.set_head_angle(cozmo.robot.MIN_HEAD_ANGLE).wait_for_completed()
 
     # initialize csv log file
     csvfp = open(BUFF_PATH+'RobotState.csv','w')
-    csvfp.write('Time,')
+    csvfp.write('Time, HeadAngle')
     csvfp.write('PosX, PosY, PosZ,')
     csvfp.write('RotQ0, RotQ2, RotQ3, RotQ4,')
     csvfp.write('AngleZ, OriginID,')
@@ -47,7 +48,7 @@ def loop(robot: cozmo.robot.Robot):
 
         # GetRobotState(robot,timestamp,csvfp)
         pose = robot.pose
-        csvfp.write(timestamp +',')
+        csvfp.write(timestamp +',' + str(HeadAngle) + ',')
         csvfp.write('%.1f, %.1f, %.1f,' % pose.position.x_y_z)
         csvfp.write('%.1f, %.1f, %.1f, %.1f,' % pose.rotation.q0_q1_q2_q3)
         csvfp.write('%.1f,' % pose.rotation.angle_z.degrees)
@@ -59,7 +60,7 @@ def loop(robot: cozmo.robot.Robot):
 
         inc += 1
         print(inc)
-        time.sleep(0.05)
+        time.sleep(0.19)
     csvfp.close()
 
 def GetRobotState(robot:cozmo.robot.Robot):
