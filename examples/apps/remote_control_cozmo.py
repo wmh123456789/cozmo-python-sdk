@@ -57,7 +57,7 @@ class RobotStateDisplay(cozmo.annotate.Annotator):
         def print_line(text_line):
             text = cozmo.annotate.ImageText(text_line, position=cozmo.annotate.TOP_LEFT, outline_color='black', color='lightblue')
             text.render(d, bounds)
-            TEXT_HEIGHT = 11
+            TEXT_HEIGHT = 14
             bounds[1] += TEXT_HEIGHT
 
         robot = self.world.robot  # type: cozmo.robot.Robot
