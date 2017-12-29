@@ -7,7 +7,7 @@ import os
 import cozmo
 
 # BUFF_PATH = "/home/wmh/work/seqbuff/"
-BUFF_PATH = "/Users/wty/work/TestSeq/MoveOnMat1/"
+BUFF_PATH = "/Users/wty/work/TestSeq/ZigzagOnMat1/"
 
 BUFF_LENGTH = 10000
 last_image = None
@@ -32,19 +32,19 @@ def loop(robot: cozmo.robot.Robot):
 
     while inc < BUFF_LENGTH :
         timestamp = str('%.4f' % time.time())
-        # im = capture_pic(robot).raw_image
-        # # timestamp = str(time.strftime("%H%M%S"))+"_"+str(time.time())
+        im = capture_pic(robot).raw_image
+        # timestamp = str(time.strftime("%H%M%S"))+"_"+str(time.time())
 
-        # print("Get image No." + str(inc)+", in size:"+str(im.size))
-        # # im.save(str('%.4f'%time.time())+'.png','png')
-        # # im.save(BUFF_PATH + str(inc) + '.png','png')
-        # im.save(BUFF_PATH + str(inc) + '.jpg')
-        #
-        # #Write timestamp and robot state to file
-        # fp = open(BUFF_PATH+str(inc)+'.txt','w')
+        print("Get image No." + str(inc)+", in size:"+str(im.size))
+        # im.save(str('%.4f'%time.time())+'.png','png')
+        # im.save(BUFF_PATH + str(inc) + '.png','png')
+        im.save(BUFF_PATH + str(inc) + '.jpg')
 
-        # fp.write(timestamp)
-        # fp.close()
+        #Write timestamp and robot state to file
+        fp = open(BUFF_PATH+str(inc)+'.txt','w')
+
+        fp.write(timestamp)
+        fp.close()
 
         # GetRobotState(robot,timestamp,csvfp)
         pose = robot.pose
